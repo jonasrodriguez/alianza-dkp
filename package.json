@@ -1,0 +1,16 @@
+{
+  "name": "alianza-dkp",
+  "version": "1.0.0",
+  "description": "DKP manager for Alianza Discord",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Grill",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5",
+    "sqlite3": "^5.1.7"
+  }
+}
