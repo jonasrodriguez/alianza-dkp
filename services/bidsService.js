@@ -1,7 +1,30 @@
 const { getUserByDiscord, getUserById, updateDKPs, addNewBid, getBidById } = require('../db/db.js');
 const { postMessage } = require('./discordService.js');
+const { logOnDiscord } = require('./discordService');
+const { addBid } = require('./googleService.js');
 
 module.exports = { 
+  newBid: async (message) => {
+    const content = message.content.split(' ');
+
+    // Check bid format
+    if (content.length !== 3) {      
+      logOnDiscord(null, message.client, `Formato de bid incorrecto en "${message.content}". Ejemplo, fulano robe 10.`);
+      return;
+    }
+
+    const raider = content[0];
+    const item = content[1];
+    const dkp = content[2];
+
+    // Check if the dkp is a number
+    if (!isNumeric(dkp)) {
+      logOnDiscord(null, message.client, `Formato de bid incorrecto en "${message.content}". Ejemplo, fulano robe 10.`);
+      return;
+    }
+    await addBid(message.client, raider, item, dkp);
+    logOnDiscord(null, message.client, `Añadida bid "${message.content}".`);
+  },
   addBid: async (interaction, raider, item, dkp, type) => {
     const user = await getUserByDiscord(raider.discord);
     if (!user) {
@@ -50,4 +73,8 @@ async function sendRemoveMessage(interaction, bid, user) {
     const msg = `Eliminada compra [#${bid.id}] de <@${user.discord}> por '${bid.item}' - DKPs restantes: ${user.dkp}`;
     await postMessage(interaction, msg, 'banco');
   }
+}
+
+function isNumeric(value) {
+  return /^-?\d+$/.test(value);
 }

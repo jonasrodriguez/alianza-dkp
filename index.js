@@ -1,10 +1,11 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
-const { token } = require('./config.json');
-const { readEncountersValues } = require('./services/encounterService.js');
+const { token, bidsChannelId } = require('./config.json');
+const { readDKPValues } = require('./services/googleService.js');
+const { newBid } = require('./services/bidsService.js');
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.MessageContent] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages,GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.MessageContent] });
 
 client.commands = new Collection();
 const foldersPath = path.join(__dirname, 'commands');
@@ -20,10 +21,16 @@ for (const file of commandFiles) {
 	}
 }
 
+// On startup, read DKP values from the spreadsheet and store em in the encounter service
 client.once(Events.ClientReady, readyClient => {
-	const dkpChannel = readyClient.channels.cache.find(channel => channel.name === 'raid-dkp-values');
-	readEncountersValues(dkpChannel);
-	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
+	readDKPValues(readyClient);
+});
+
+// Bid channel watcher
+client.on(Events.MessageCreate, (event) => {
+	if (event.channel.id === bidsChannelId) {
+		newBid(event);
+	}
 });
 
 client.on(Events.InteractionCreate, async interaction => {
@@ -32,11 +39,6 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	if (!command) {
 		console.error(`No command matching ${interaction.commandName} was found.`);
-		return;
-	}
-
-	if (!interaction.member.roles.cache.some(r => r.name === 'Officer')) {
-		await interaction.reply({ content: 'You do not have permission to use this command.', ephemeral: true });
 		return;
 	}
 

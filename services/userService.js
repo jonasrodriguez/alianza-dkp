@@ -13,7 +13,13 @@ module.exports = {
     const id = await addNewUser(member);
     const user = {id, dkp: 0};
     return user;
-  },  
+  },
+  getAllUsers: async function getAllUsers(interaction) {
+    const guild = await interaction.guilds.fetch("1145624354349129810")
+    const members = await guild.members.fetch();
+    const raiders = members.map(member => ({username: member.user.username, discord: member.user.id}))
+    console.log(raiders);
+  }
 }
 
 async function updateUser(user, dkp) {

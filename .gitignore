@@ -2,3 +2,6 @@ node_modules
 .env
 config.json
 dkp.db
+credentials.json
+service-account.json
+token.json

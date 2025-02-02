@@ -15,12 +15,10 @@ module.exports = {
       return;
     }
 		const reaiders = raidChannel.members.map(member => ({username: member.user.username, discord: member.user.id}));
-		const encounter = getEncounterByName('On Time');
-		encounter.description = '';
-		encounter.firstKill = 0;
+		const encounter = getEncounterByName('On Time', interaction);
 
-		await addLogs(interaction, encounter, reaiders);
+		addLogs(interaction, encounter, reaiders);
 
-		await interaction.reply("Logs ontime tomados");
+		await interaction.reply("Procesando logs OnTime...");
 	},
 };

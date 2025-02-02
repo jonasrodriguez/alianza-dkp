@@ -12,9 +12,6 @@ module.exports = {
         .setDescription('Encounter actual')
         .setRequired(true)
         .setAutocomplete(true))
-    .addStringOption(option =>
-      option.setName('description')
-        .setDescription('Detalles encounter'))
     .addBooleanOption(option =>
       option.setName('firstkill')
         .setDescription('Encounter first kill')),
@@ -43,8 +40,6 @@ module.exports = {
     const encounterName = interaction.options.getString('encouter');    
     const encounter = getEncounterByName(encounterName);
 
-    const description = interaction.options.getString('description');
-    encounter.description = description ? description : '';
     const firstKill = interaction.options.getBoolean('firstkill');
     encounter.firstKill = firstKill ? 1 : 0;
 
@@ -52,8 +47,8 @@ module.exports = {
       encounter.dkp = encounter.dkp * 2;
     }
 
-    await addLogs(interaction, encounter, reaiders);
+    addLogs(interaction, encounter, reaiders);
 
-		await interaction.reply("Logs tomados para " + encounterName);
+		await interaction.reply(`Procesando logs para ${encounter.encounter}...`);
 	},
 };
