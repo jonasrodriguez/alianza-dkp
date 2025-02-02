@@ -1,4 +1,4 @@
-Discord bot based on (DiscordJS)[https://discord.js.org/].   
+Discord bot based on [DiscordJS](https://discord.js.org/).   
 Uses [google-auth-library](https://www.npmjs.com/package/google-auth-library) for Google authentication and [google-spreadsheet](https://www.npmjs.com/package/google-spreadsheet) for managing Google spreadsheets.
 
 Bot Commands:
