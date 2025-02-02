@@ -3,5 +3,5 @@
 	"clientId": [CLIENT ID],
 	"guildId":[GUILD ID],
 	"excelId":[DKP EXCEL ID],
-	"bidsChannelId":[BIDS CHANNEL ID],
+	"bidsChannelId":[BIDS CHANNEL ID]
 }
