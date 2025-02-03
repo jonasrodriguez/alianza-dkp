@@ -20,7 +20,7 @@ module.exports = {
       logOnDiscord(null, message.client, `Formato de bid incorrecto en "${message.content}". Ejemplo, fulano robe 10.`);
       return;
     }
-    await addBid(message.client, raider, item, dkp);
+    await addBid(message.client, raider, item, -dkp);
     logOnDiscord(null, message.client, `Añadida bid "${message.content}".`);
   },
 }
