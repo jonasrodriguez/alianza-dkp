@@ -1,5 +1,5 @@
 const { readMembers, addRaidValues } = require('./googleService.js');
-const { logOnDiscord } = require('./discordService');
+const { logOnDiscord, logEncounterChannel } = require('./discordService');
 const { logDate } = require('../utils/date.js');
 
 module.exports = {
@@ -30,6 +30,6 @@ module.exports = {
 		// Notify discord channel
 		const raiderList = raiders.map(r => `* <@${r.discord}>`).join('\n');
 		const message = `Logs tomados para "${encounter.encounter}". Raiders presentes: ${raiders.length}\n${raiderList}`;
-		logOnDiscord(interaction, null, message, encounter.channel);
+		logEncounterChannel(interaction, message, encounter.channel);
 	},	
 };

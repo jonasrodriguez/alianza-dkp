@@ -1,19 +1,23 @@
 const { logDateTime } = require('../utils/date.js');
-
-const LOGS_CHANNEL = 'bot-logs';
+const { logChannelId } = require('../config.json');
 
 module.exports = {
-	logOnDiscord: (interaction, client, message, discordChannel = LOGS_CHANNEL) => {
+	logOnDiscord: (interaction, client, message) => {
 		let logsChannel = null;
 		if (interaction) {
-			logsChannel = interaction.client.channels.cache.find(channel => channel.name === discordChannel);
+			logsChannel = interaction.client.channels.cache.find(channel => channel.id === logChannelId);
 		}
 		else {
-			logsChannel = client.channels.cache.find(channel => channel.name === discordChannel);
+			logsChannel = client.channels.cache.find(channel => channel.id === logChannelId);
 		}
 		logsChannel.send(logDateTime() + message);
 	},
-	getChannelByName: (interaction, name) => {
-		return interaction.client.channels.cache.find(channel => channel.name === name);
-	},		
+	logEncounterChannel: (interaction, message, discordChannel) => {
+		const encounterChannel = interaction.client.channels.cache.find(channel => channel.name === discordChannel);
+		if (!encounterChannel) {
+			logOnDiscord(interaction, null, `Error: no se ha encontrado el canal "${discordChannel}"`);
+			return;
+		}
+		encounterChannel.send(logDateTime() + message);
+	},
 };
