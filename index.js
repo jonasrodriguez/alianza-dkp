@@ -4,6 +4,7 @@ const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 const { token, bidsChannelId } = require('./config.json');
 const { readDKPValues } = require('./services/googleService.js');
 const { newBid } = require('./services/bidsService.js');
+const { logOnDiscord } = require('./services/discordService');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages,GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.MessageContent] });
 
@@ -23,6 +24,7 @@ for (const file of commandFiles) {
 
 // On startup, read DKP values from the spreadsheet and store em in the encounter service
 client.once(Events.ClientReady, readyClient => {
+	logOnDiscord(null, readyClient, `Iniciando Alianza DKP Bot!`);
 	readDKPValues(readyClient);
 });
 

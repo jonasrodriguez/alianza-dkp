@@ -15,7 +15,7 @@ module.exports = {
 	logEncounterChannel: (interaction, message, discordChannel) => {
 		const encounterChannel = interaction.client.channels.cache.find(channel => channel.name === discordChannel);
 		if (!encounterChannel) {
-			logOnDiscord(interaction, null, `Error: no se ha encontrado el canal "${discordChannel}"`);
+			module.exports.logOnDiscord(interaction, null, `Error: no se ha encontrado el canal "${discordChannel}"`);
 			return;
 		}
 		encounterChannel.send(logDateTime() + message);

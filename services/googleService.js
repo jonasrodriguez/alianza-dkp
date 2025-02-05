@@ -1,4 +1,4 @@
-const { authorize, googleClient } = require('./authService');
+const { googleClient } = require('./authService');
 const { excelId } = require('../config.json');
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 const { logOnDiscord } = require('./discordService');
@@ -21,12 +21,13 @@ const DISCORD_COLUMN = 'Discord ID';
 module.exports = {
 	readDKPValues: async (client) => {
     try {
+      logOnDiscord(null, client, `Cargando los valores DKP de cada encounter...`);
       const excel = await openDkpSpreadsheet();
       const dkpValuesSheet = excel.sheetsByTitle[DKP_SHEET_NAME];
       const dkpValues = await dkpValuesSheet.getRows();
       const encountersList = mapExcelDkpValues(dkpValues);
       updateEncounterLists(encountersList);
-      logOnDiscord(null, client, `Se han cargado correctamente ${encountersList.length} raid encounters del excel.`);
+      logOnDiscord(null, client, `Se han cargado correctamente ${encountersList.length} raid encounters.`);
     } catch (error) {
       logOnDiscord(null, client, 'No se pudo leer los valores de DKP del excel.' + error);
     }

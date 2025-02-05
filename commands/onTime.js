@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('discord.js');
 const { getEncounterByName } = require('../services/encounterService.js');
 const { addLogs } = require('../services/logService.js');
 const { raidChannelId } = require('../config.json');
+const { logDateTime } = require('../utils/date.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -19,6 +20,6 @@ module.exports = {
 
 		addLogs(interaction, encounter, reaiders);
 
-		await interaction.reply("Procesando logs OnTime...");
+		await interaction.reply(logDateTime() + "Procesando logs OnTime...");
 	},
 };

@@ -20,7 +20,7 @@ module.exports = {
 
 		// Check if any raider not found & log it
 		const raidersNotFound = raiders.filter(raider => !membersList.find(member => member.discord === raider.discord));
-		let logMessage = `Logs tomados para "${encounter.encounter}". Raiders online: ${raiders.length}`;
+		let logMessage = `${interaction.user.tag} a tomado logs para "${encounter.encounter}". Raiders online: ${raiders.length}`;
 		if (raidersNotFound.length > 0) {
 			const formatNames = raidersNotFound.map(r => `<@${r.discord}>`).join(', ');
 			logMessage = logMessage.concat(`\nLos siguientes raiders no estan en excel: ${formatNames}\nAñadir manualmente o revisar columna "DiscordId".`);
