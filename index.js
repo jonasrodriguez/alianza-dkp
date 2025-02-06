@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
-const { token, bidsChannelId } = require('./config.json');
+const { token, discordBidsChannel } = require('./config.json');
 const { readDKPValues } = require('./services/googleService.js');
 const { newBid } = require('./services/bidsService.js');
 const { logOnDiscord } = require('./services/discordService');
@@ -30,7 +30,7 @@ client.once(Events.ClientReady, readyClient => {
 
 // Bid channel watcher
 client.on(Events.MessageCreate, (event) => {
-	if (event.channel.id === bidsChannelId) {
+	if (event.channel.id === discordBidsChannel) {
 		newBid(event);
 	}
 });

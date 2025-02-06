@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { getEncounterByName } = require('../services/encounterService.js');
 const { addLogs } = require('../services/logService.js');
-const { raidChannelId } = require('../config.json');
+const { discordRaidVoiceChannel } = require('../config.json');
 const { logDateTime } = require('../utils/date.js');
 
 module.exports = {
@@ -10,7 +10,7 @@ module.exports = {
 		.setDescription('Toma logs OnTime del canal RAID'),
 	
 	async execute(interaction) {
-		const raidChannel = interaction.client.channels.cache.find(channel => channel.id === raidChannelId);
+		const raidChannel = interaction.client.channels.cache.find(channel => channel.id === discordRaidVoiceChannel);
     if (raidChannel.members.size === 0) {
       await interaction.reply("No hay nadie en el canal RAID");
       return;

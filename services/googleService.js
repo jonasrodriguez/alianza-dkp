@@ -1,5 +1,5 @@
 const { googleClient } = require('./authService');
-const { excelId } = require('../config.json');
+const { alianzaDkpExcel } = require('../config.json');
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 const { logOnDiscord } = require('./discordService');
 const { updateEncounterLists } = require('./encounterService');
@@ -88,7 +88,7 @@ module.exports = {
 async function openDkpSpreadsheet() {
   //const auth = await authorize();
   const client = await googleClient();
-  const excel = new GoogleSpreadsheet(excelId, client);
+  const excel = new GoogleSpreadsheet(alianzaDkpExcel, client);
   await excel.loadInfo(); 
   return excel;
 }

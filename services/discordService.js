@@ -1,14 +1,14 @@
 const { logDateTime } = require('../utils/date.js');
-const { logChannelId } = require('../config.json');
+const { discordLogsChannel } = require('../config.json');
 
 module.exports = {
 	logOnDiscord: (interaction, client, message) => {
 		let logsChannel = null;
 		if (interaction) {
-			logsChannel = interaction.client.channels.cache.find(channel => channel.id === logChannelId);
+			logsChannel = interaction.client.channels.cache.find(channel => channel.id === discordLogsChannel);
 		}
 		else {
-			logsChannel = client.channels.cache.find(channel => channel.id === logChannelId);
+			logsChannel = client.channels.cache.find(channel => channel.id === discordLogsChannel);
 		}
 		logsChannel.send(logDateTime() + message);
 	},
