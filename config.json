@@ -2,6 +2,8 @@
 	"token": [DISCORD BOT TOKEN],
 	"clientId": [CLIENT ID],
 	"guildId":[GUILD ID],
-	"excelId":[DKP EXCEL ID],
-	"bidsChannelId":[BIDS CHANNEL ID]
+	"alianzaDkpExcel": [DKP EXCEL ID],
+	"discordBidsChannel": [BIDS CHANNEL ID],
+	"discordLogsChannel": [LOGS CHANNEL ID],
+	"discordRaidVoiceChannel": [RAID VOICE CHANNEL ID]
 }
