@@ -7,7 +7,7 @@ module.exports = {
 		encounterList.forEach(e => encounters.push(e));
 	},
 	getEncounterByName: (encounterName, interaction) => {
-		const encounter = encounters.find(e => e.encounter === encounterName);
+		const encounter = encounters.find(e => e.name === encounterName);
 		if (encounter) {
 			return encounter;
 		}
@@ -15,6 +15,6 @@ module.exports = {
 		return null;
 	},
 	getEncountersNameList: () => {
-		return encounters.map(e => e.encounter);
+		return encounters.map(e => e.name);
 	}
 };

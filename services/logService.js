@@ -15,12 +15,12 @@ module.exports = {
 				updateList.push(0);
 			}
 		}
-		const columnHeader = encounter.encounter + ' ' + logDate();
+		const columnHeader = encounter.name + ' ' + logDate();
 		await addRaidValues(interaction, columnHeader, updateList);
 
 		// Check if any raider not found & log it
 		const raidersNotFound = raiders.filter(raider => !membersList.find(member => member.discord === raider.discord));
-		let logMessage = `${interaction.user.tag} a tomado logs para "${encounter.encounter}". Raiders online: ${raiders.length}`;
+		let logMessage = `${interaction.user.tag} a tomado logs para "${encounter.name}". Raiders online: ${raiders.length}`;
 		if (raidersNotFound.length > 0) {
 			const formatNames = raidersNotFound.map(r => `<@${r.discord}>`).join(', ');
 			logMessage = logMessage.concat(`\nLos siguientes raiders no estan en excel: ${formatNames}\nAñadir manualmente o revisar columna "DiscordId".`);
@@ -29,7 +29,7 @@ module.exports = {
 
 		// Notify discord channel
 		const raiderList = raiders.map(r => `* <@${r.discord}>`).join('\n');
-		const message = `Logs tomados para "${encounter.encounter}". Raiders presentes: ${raiders.length}\n${raiderList}`;
-		logEncounterChannel(interaction, message, encounter.channel);
+		const message = `Logs tomados para "${encounter.name}". Raiders presentes: ${raiders.length}\n${raiderList}`;
+		logEncounterChannel(interaction, message, encounter);
 	},	
 };

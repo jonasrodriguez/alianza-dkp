@@ -50,6 +50,6 @@ module.exports = {
 
     addLogs(interaction, encounter, reaiders);
 
-		await interaction.reply(logDateTime() + `Procesando logs para ${encounter.encounter}...`);
+		await interaction.reply(logDateTime() + `Procesando logs para ${encounter.name}...`);
 	},
 };

@@ -14,6 +14,7 @@ const ENCOUNTER_COLUMN = 'Encounter';
 const DKP_COLUMN = 'DKP';
 const ZONE_COLUMN = 'Zone';
 const CHANNEL_COLUMN = 'Discord Channel';
+const CHANNEL_ID_COLUMN = 'Discord Channel ID';
 
 const MEMBER_COLUMN = 'MIEMBRO';
 const DISCORD_COLUMN = 'Discord ID';
@@ -99,10 +100,11 @@ function mapExcelDkpValues(rows) {
   for (let i = 0; i < rows.length; i++) {
     encounters.push({
       id: i,
-      encounter: rows[i].get(ENCOUNTER_COLUMN),
+      name: rows[i].get(ENCOUNTER_COLUMN),
       dkp: rows[i].get(DKP_COLUMN),
       zone: rows[i].get(ZONE_COLUMN),
       channel: rows[i].get(CHANNEL_COLUMN),
+      channelId: rows[i].get(CHANNEL_ID_COLUMN),
     })
   }
   return encounters;
