@@ -25,7 +25,7 @@ module.exports = {
     if (!focusedValue) {
       filtered = encounters.slice(0, 24);
     } else{
-      filtered = encounters.filter(encounter => encounter.toLowerCase().startsWith(focusedValue.toLowerCase()));
+      filtered = encounters.filter(encounter => encounter.toLowerCase().includes(focusedValue.toLowerCase()));
     }
     await interaction.respond(filtered.map(f => ({ name: f, value: f })));
   },
@@ -50,6 +50,6 @@ module.exports = {
 
     addLogs(interaction, encounter, reaiders);
 
-		await interaction.reply(logDateTime() + `Procesando logs para ${encounter.name}...`);
+		await interaction.reply(logDateTime() + `Procesando logs para '${encounter.name}'...`);
 	},
 };

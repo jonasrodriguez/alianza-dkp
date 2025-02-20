@@ -20,6 +20,6 @@ module.exports = {
 
 		addLogs(interaction, encounter, reaiders);
 
-		await interaction.reply(logDateTime() + "Procesando logs OnTime...");
+		await interaction.reply(logDateTime() + "Procesando logs 'OnTime'...");
 	},
 };

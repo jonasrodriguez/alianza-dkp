@@ -16,5 +16,8 @@ module.exports = {
 	},
 	getEncountersNameList: () => {
 		return encounters.map(e => e.name);
+	},
+	clearEncounters: () => {
+		encounters.length = 0;		
 	}
 };

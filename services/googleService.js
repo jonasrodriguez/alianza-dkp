@@ -22,7 +22,7 @@ const DISCORD_COLUMN = 'Discord ID';
 module.exports = {
 	readDKPValues: async (client) => {
     try {
-      logOnDiscord(null, client, `Cargando los valores DKP de cada encounter...`);
+      logOnDiscord(null, client, `Cargando los valores del listado de encounters...`);
       const excel = await openDkpSpreadsheet();
       const dkpValuesSheet = excel.sheetsByTitle[DKP_SHEET_NAME];
       const dkpValues = await dkpValuesSheet.getRows();
