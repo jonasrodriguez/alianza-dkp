@@ -28,10 +28,11 @@ module.exports = {
     const dkp = interaction.options.getInteger('dkps');
 
     const epicFightEncounter = getEncounterByName('Epic Kills');
-    epicFightEncounter.name = encounterName
-    epicFightEncounter.dkp = dkp;
+    const manualEncounter = {...epicFightEncounter};
+    manualEncounter.name = encounterName
+    manualEncounter.dkp = dkp;
 
-    addLogs(interaction, epicFightEncounter, reaiders);
+    addLogs(interaction, manualEncounter, reaiders);
 
 		await interaction.reply(logDateTime() + `Procesando manual logs para '${encounterName}'...`);
 	},
