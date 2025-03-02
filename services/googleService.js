@@ -51,10 +51,13 @@ module.exports = {
       // Load only the impacted columns
       const lastRow = raidSheet.rowCount - 1;
       let lastColumn = raidSheet.columnCount - 1;
-      await raidSheet.loadCells();
+      //await raidSheet.loadCells();
       /*await raidSheet.loadCells({ 
         startRowIndex: 0, endRowIndex: lastRow, startColumnIndex: lastColumn - 1, endColumnIndex: lastColumn
       });*/
+      await raidSheet.loadCells({ 
+        startColumnIndex: lastColumn - 1
+      });
 
       // Update last column with dkp values
       const newRaidHeader = raidSheet.getCell(0, lastColumn);      
